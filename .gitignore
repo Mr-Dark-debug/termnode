@@ -1,0 +1,30 @@
+# Binary
+termnode
+*.exe
+
+# Go
+vendor/
+
+# Database
+*.db
+*.db-wal
+*.db-shm
+
+# PID files
+*.pid
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Build
+*.o
+*.a
