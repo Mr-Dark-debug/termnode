@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation — TermNode</title>
+    <meta name="description" content="TermNode documentation: installation, configuration, API reference, and keybindings.">
+    <meta name="theme-color" content="#0F172A">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="website/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%234FD1C5'>&#9654;</text></svg>">
+</head>
+<body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ═══ NAV ═══ -->
+    <nav class="nav scrolled" id="mainNav">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span>&gt;_</span> Term<span class="logo-accent">Node</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="docs.html" class="active">Docs</a></li>
+                <li><a href="changelog.html">Changelog</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="https://github.com/Mr-Dark-debug/termnode" class="btn btn-primary btn-sm">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-mobile" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="docs.html">Documentation</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="https://github.com/Mr-Dark-debug/termnode" style="color: var(--teal);">GitHub</a>
+    </div>
+
+    <!-- ═══ PAGE HEADER ═══ -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Documentation</h1>
+            <p>Everything you need to install, configure, and use TermNode.</p>
+        </div>
+    </div>
+
+    <!-- ═══ DOCS LAYOUT ═══ -->
+    <div class="container">
+        <div class="docs-layout">
+
+            <!-- Sidebar -->
+            <aside class="docs-sidebar">
+                <div class="docs-sidebar-title">Getting Started</div>
+                <ul class="docs-sidebar-nav">
+                    <li><a href="#prerequisites" class="active">Prerequisites</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#quick-start">Quick Start</a></li>
+                    <li><a href="#cli-options">CLI Options</a></li>
+                </ul>
+
+                <div class="docs-sidebar-title">Screens</div>
+                <ul class="docs-sidebar-nav">
+                    <li><a href="#dashboard">Hardware Dashboard</a></li>
+                    <li><a href="#services">Service Manager</a></li>
+                    <li><a href="#iot">IoT Bridge</a></li>
+                    <li><a href="#help">Help Screen</a></li>
+                </ul>
+
+                <div class="docs-sidebar-title">Reference</div>
+                <ul class="docs-sidebar-nav">
+                    <li><a href="#keybindings">Keybindings</a></li>
+                    <li><a href="#api">IoT Webhook API</a></li>
+                    <li><a href="#building">Building from Source</a></li>
+                    <li><a href="#architecture">Architecture</a></li>
+                </ul>
+            </aside>
+
+            <!-- Content -->
+            <main class="docs-content">
+
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>Before installing TermNode, make sure you have the following:</p>
+                <ul>
+                    <li><strong>Termux</strong> — Install from <a href="https://f-droid.org/en/packages/com.termux/">F-Droid</a> or <a href="https://github.com/termux/termux-app/releases">GitHub releases</a>. The Play Store version is outdated.</li>
+                    <li><strong>Go 1.22+</strong> — Install via <code>pkg install golang</code> in Termux.</li>
+                    <li><strong>termux-api</strong> — Install the package (<code>pkg install termux-api</code>) <em>and</em> the <a href="https://f-droid.org/en/packages/com.termux.api/">Termux:API</a> Android app. Grant it permissions in Android settings.</li>
+                    <li><strong>OpenSSH</strong> (optional) — For the SSH server feature: <code>pkg install openssh</code>.</li>
+                </ul>
+                <p>Test that termux-api works:</p>
+                <div class="code-block"><button class="code-copy">Copy</button><code>termux-battery-status</code></div>
+
+                <h2 id="installation">Installation</h2>
+                <h3>Option 1: Download Binary (Recommended)</h3>
+                <div class="code-block"><button class="code-copy">Copy</button><code>wget https://github.com/Mr-Dark-debug/termnode/releases/latest/download/termnode
+chmod +x termnode
+./termnode</code></div>
+
+                <h3>Option 2: Build from Source</h3>
+                <div class="code-block"><button class="code-copy">Copy</button><code>git clone https://github.com/Mr-Dark-debug/termnode.git
+cd termnode
+go build -o termnode .
+./termnode</code></div>
+
+                <h3>Option 3: Go Install</h3>
+                <div class="code-block"><button class="code-copy">Copy</button><code>go install github.com/Mr-Dark-debug/termnode@latest</code></div>
+
+                <h2 id="quick-start">Quick Start</h2>
+                <p>Once installed, simply run TermNode. The TUI dashboard launches immediately:</p>
+                <div class="code-block"><button class="code-copy">Copy</button><code>./termnode</code></div>
+                <p>Use the function keys or number keys to navigate between screens:</p>
+                <ul>
+                    <li><strong>F1</strong> or <strong>1</strong> — Hardware Dashboard</li>
+                    <li><strong>F2</strong> or <strong>2</strong> — Service Manager</li>
+                    <li><strong>F3</strong> or <strong>3</strong> — IoT Event Log</li>
+                    <li><strong>F4</strong> or <strong>?</strong> — Help &amp; Keybindings</li>
+                </ul>
+                <p>Press <strong>q</strong> or <strong>Ctrl+C</strong> to quit.</p>
+
+                <h2 id="cli-options">CLI Options</h2>
+                <div class="code-block"><button class="code-copy">Copy</button><code>Usage: termnode [options]
+
+Options:
+  -db string     Path to SQLite database (default "$HOME/.termnode/termnode.db")
+  -port string   HTTP webhook listen address (default ":8080")
+  -debug         Enable debug logging to debug.log
+  -version       Print version and exit</code></div>
+
+                <h2 id="dashboard">Hardware Dashboard (F1)</h2>
+                <p>The dashboard provides real-time monitoring of your device's critical hardware metrics, powered by <code>termux-api</code>. Data auto-refreshes every 5 seconds.</p>
+                <p>Displayed information includes:</p>
+                <ul>
+                    <li>Battery percentage, status (charging/discharging), health, and temperature</li>
+                    <li>Battery current (mA) and charging status</li>
+                    <li>CPU usage percentage, core count, architecture, and temperature</li>
+                    <li>WiFi SSID, local IP address, and BSSID</li>
+                </ul>
+                <p>Press <strong>r</strong> to force a manual refresh.</p>
+
+                <h2 id="services">Service Manager (F2)</h2>
+                <p>One-toggle controls for background services:</p>
+                <table>
+                    <thead>
+                        <tr><th>Service</th><th>Description</th><th>Default Port</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Wake Lock</strong></td><td>Prevents Android battery optimization from killing your processes</td><td>—</td></tr>
+                        <tr><td><strong>SSH Server</strong></td><td>Start/stop the OpenSSH daemon for remote access</td><td>8022</td></tr>
+                        <tr><td><strong>HTTP File Server</strong></td><td>Go-powered file server serving from your home directory</td><td>8081</td></tr>
+                    </tbody>
+                </table>
+                <p>Use <strong>Up/Down</strong> or <strong>j/k</strong> to navigate, <strong>Enter</strong> to toggle a service.</p>
+
+                <h2 id="iot">IoT Bridge (F3)</h2>
+                <p>Turn your Android phone into a data collection hub for microcontrollers and IoT devices.</p>
+                <p>The IoT bridge starts an HTTP server that accepts POST requests with sensor data:</p>
+                <div class="code-block"><button class="code-copy">Copy</button><code>curl -X POST http://&lt;phone-ip&gt;:8080/webhook/temperature \
+  -H "Content-Type: application/json" \
+  -d '{"sensor":"DHT22","value":23.5,"unit":"celsius"}'</code></div>
+                <p>All events are persisted to a local SQLite database and displayed in a scrollable, real-time event log.</p>
+
+                <h2 id="help">Help Screen (F4)</h2>
+                <p>Full keybinding reference and feature documentation, always one keypress away. Displays all available commands and their shortcuts.</p>
+
+                <h2 id="keybindings">Keybindings</h2>
+                <table>
+                    <thead>
+                        <tr><th>Key</th><th>Action</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>F1</code> or <code>1</code></td><td>Dashboard tab</td></tr>
+                        <tr><td><code>F2</code> or <code>2</code></td><td>Services tab</td></tr>
+                        <tr><td><code>F3</code> or <code>3</code></td><td>IoT Log tab</td></tr>
+                        <tr><td><code>F4</code> or <code>?</code></td><td>Help tab</td></tr>
+                        <tr><td><code>q</code> or <code>Ctrl+C</code></td><td>Quit</td></tr>
+                        <tr><td><code>&uarr;</code> / <code>k</code></td><td>Move up</td></tr>
+                        <tr><td><code>&darr;</code> / <code>j</code></td><td>Move down</td></tr>
+                        <tr><td><code>Enter</code></td><td>Toggle / Activate</td></tr>
+                        <tr><td><code>r</code></td><td>Manual refresh (Dashboard)</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 id="api">IoT Webhook API</h2>
+                <h3>POST /webhook/{topic}</h3>
+                <p>Send sensor data to TermNode from any HTTP-capable device. The <code>{topic}</code> parameter is used to categorize the event.</p>
+                <p><strong>Request:</strong></p>
+                <div class="code-block"><button class="code-copy">Copy</button><code>curl -X POST http://192.168.1.100:8080/webhook/temperature \
+  -H "Content-Type: application/json" \
+  -d '{"sensor":"DHT22","value":23.5,"unit":"celsius"}'</code></div>
+                <p><strong>Response:</strong></p>
+                <div class="code-block"><button class="code-copy">Copy</button><code>{"status":"ok"}</code></div>
+                <h3>GET /health</h3>
+                <p>Health check endpoint for monitoring.</p>
+                <div class="code-block"><button class="code-copy">Copy</button><code>{"status":"ok"}</code></div>
+
+                <h2 id="building">Building from Source</h2>
+                <div class="code-block"><button class="code-copy">Copy</button><code># Default build
+go build -o termnode .
+
+# With version info
+go build -ldflags="-X main.version=$(git describe --tags)" -o termnode .
+
+# With MQTT support (future)
+go build -tags mqtt -o termnode .
+
+# Cross-compile from desktop
+GOOS=android GOARCH=arm64 go build -o termnode-android .</code></div>
+                <h3>Make Targets</h3>
+                <table>
+                    <thead><tr><th>Command</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>make</code></td><td>Build the binary</td></tr>
+                        <tr><td><code>make run</code></td><td>Build and run</td></tr>
+                        <tr><td><code>make test</code></td><td>Run tests</td></tr>
+                        <tr><td><code>make debug</code></td><td>Build and run with debug logging</td></tr>
+                        <tr><td><code>make clean</code></td><td>Remove binary and logs</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 id="architecture">Architecture</h2>
+                <p>TermNode uses the Elm Architecture via <a href="https://github.com/charmbracelet/bubbletea">Bubble Tea</a>. The root model composes screen models, each implementing <code>Init()</code>, <code>Update()</code>, and <code>View()</code>.</p>
+                <h3>Project Structure</h3>
+                <div class="code-block"><button class="code-copy">Copy</button><code>termnode/
+├── main.go                         # Thin entry point
+├── internal/
+│   ├── app/                        # Root TUI model & routing
+│   ├── daemon/                     # Wake-lock & process management
+│   ├── hardware/                   # termux-api polling & parsing
+│   ├── iot/                        # HTTP webhook server
+│   ├── db/                         # SQLite repository layer
+│   ├── screen/                     # Individual TUI screens
+│   └── theme/                      # Lipgloss styles & colors
+├── migrations/                     # SQL schema (embedded in binary)
+└── plan/                           # Development plans & docs</code></div>
+                <p>All dependencies are pure Go — zero CGO required. The database auto-migrates on startup via embedded Goose migrations.</p>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo"><span>&gt;_</span> Term<span class="logo-accent">Node</span></div>
+                    <p>A unified TUI dashboard for headless Android management.</p>
+                </div>
+                <div class="footer-col"><h4>Product</h4><ul><li><a href="index.html#features">Features</a></li><li><a href="index.html#install">Installation</a></li><li><a href="changelog.html">Changelog</a></li></ul></div>
+                <div class="footer-col"><h4>Resources</h4><ul><li><a href="docs.html">Documentation</a></li><li><a href="https://github.com/Mr-Dark-debug/termnode/issues">Issues</a></li></ul></div>
+                <div class="footer-col"><h4>Project</h4><ul><li><a href="https://github.com/Mr-Dark-debug/termnode">GitHub</a></li><li><a href="https://github.com/Mr-Dark-debug/termnode/blob/main/LICENSE">MIT License</a></li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">&copy; 2026 TermNode Project. MIT Licensed.</div>
+                <div class="footer-social">
+                    <a href="https://github.com/Mr-Dark-debug/termnode" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="website/app.js"></script>
+</body>
+</html>

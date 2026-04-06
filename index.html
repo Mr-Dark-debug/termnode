@@ -4,86 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TermNode — Your Android. Headless. Under Control.</title>
-    <meta name="description" content="A unified TUI dashboard for managing headless Android devices in Termux. Simple. Fast. Essential.">
-    
+    <meta name="description" content="A unified TUI dashboard for managing headless Android devices in Termux. Hardware monitoring, service management, IoT bridge — one binary, zero dependencies.">
+    <meta name="theme-color" content="#0F172A">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="TermNode — Headless Android Management">
+    <meta property="og:description" content="A unified TUI dashboard for managing headless Android devices in Termux.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mr-dark-debug.github.io/termnode/">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="website/style.css">
-    
-    <!-- Favicon (SVG) -->
+
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%234FD1C5'>&#9654;</text></svg>">
 </head>
 <body>
 
-    <!-- ═══════════════ NAV ═══════════════ -->
-    <nav class="nav">
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ═══════════════ NAVIGATION ═══════════════ -->
+    <nav class="nav" id="mainNav">
         <div class="container nav-inner">
-            <div class="nav-logo">
+            <a href="index.html" class="nav-logo">
                 <span>&gt;_</span> Term<span class="logo-accent">Node</span>
-            </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="changelog.html">Changelog</a></li>
+            </ul>
             <div class="nav-cta">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#install" class="nav-link">Install</a>
-                <a href="https://github.com/Mr-Dark-debug/termnode" class="btn btn-primary btn-sm">GitHub Repo</a>
+                <a href="https://github.com/Mr-Dark-debug/termnode" class="btn btn-primary btn-sm">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                </a>
             </div>
+            <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="nav-mobile" id="mobileMenu">
+        <a href="#features" onclick="closeMobile()">Features</a>
+        <a href="#how-it-works" onclick="closeMobile()">How It Works</a>
+        <a href="docs.html">Documentation</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="https://github.com/Mr-Dark-debug/termnode" style="color: var(--teal);">GitHub</a>
+    </div>
+
     <!-- ═══════════════ HERO ═══════════════ -->
-    <section class="hero">
-        <div class="hero-arc"></div>
-        <div class="container hero-content">
-            <span class="badge">v1.0.0 is out</span>
-            <h1>Your Android.<br><span class="gradient-text">Headless.</span> Under Control.</h1>
-            <p class="hero-sub">A unified TUI dashboard for managing headless Android devices in Termux. Simple. Fast. Essential.</p>
+    <section class="hero" id="hero">
+        <div class="hero-bg" id="heroBg">
+            <div class="hero-grid" data-speed="0.3"></div>
+            <div class="hero-glow-1" data-speed="0.15"></div>
+            <div class="hero-glow-2" data-speed="0.1"></div>
+            <div class="hero-glow-3" data-speed="0.2"></div>
+            <!-- Particles injected by JS -->
+        </div>
+
+        <div class="hero-content">
+            <span class="badge">v1.0.0 — First stable release</span>
+            <h1>Your Android.<br><span class="gradient-text-hero">Headless.</span> Under Control.</h1>
+            <p class="hero-sub">A unified TUI dashboard for managing headless Android devices in Termux. One binary, zero dependencies, full control.</p>
             <div class="hero-actions">
-                <a href="https://github.com/Mr-Dark-debug/termnode" class="btn btn-primary">
+                <a href="https://github.com/Mr-Dark-debug/termnode" class="btn btn-primary btn-lg">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                     View on GitHub
                 </a>
+                <a href="#install" class="btn btn-ghost btn-lg">
+                    Quick Install &darr;
+                </a>
             </div>
+        </div>
+
+        <div class="hero-scroll-hint">
+            Scroll to explore
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
         </div>
     </section>
 
-    <!-- ═══════════════ TERMINAL SECTION ═══════════════ -->
+    <!-- ═══════════════ TERMINAL DEMO ═══════════════ -->
     <section class="terminal-section">
         <div class="container">
-            <div class="terminal-window">
+            <div class="terminal-window reveal">
                 <div class="terminal-header">
                     <span class="term-dot"></span>
                     <span class="term-dot"></span>
                     <span class="term-dot"></span>
-                    <span style="flex-grow:1; text-align:center; font-size:0.7rem; color:var(--text-dim);">termnode — bash</span>
+                    <span class="terminal-title">termnode — bash</span>
                 </div>
-                <div class="terminal-body">
-                    <span class="term-title">TERMNODE</span>
-                    <div class="term-line">
-                        <span class="term-prompt">&gt;</span>
-                        <span class="term-cmd">help</span>
-                    </div>
-                    <span class="term-output">Available commands: battery, services, iot log, config, exit.</span>
-                    
-                    <div class="term-line">
-                        <span class="term-prompt">&gt;</span>
-                        <span class="term-cmd">battery</span>
-                    </div>
-                    <span class="term-output">Level: 87% | Status: Discharging | Health: Good | Temp: 31.2°C</span>
-                    
-                    <div class="term-line">
-                        <span class="term-prompt">&gt;</span>
-                        <span class="term-cmd">services</span>
-                    </div>
-                    <span class="term-output">SSH: [RUNNING] | HTTP: [STOPPED] | WakeLock: [ACTIVE]</span>
-                    
-                    <div class="term-line">
-                        <span class="term-prompt">&gt;</span>
-                        <span class="term-cmd">iot log</span>
-                    </div>
-                    <span class="term-output">12:04:22 - ESP32_Temp: 24.5°C<br>12:05:01 - LivingRoom_Light: ON</span>
+                <div class="terminal-body" id="terminalBody">
+                    <span class="term-title-label">TERMNODE v1.0.0</span>
+                    <!-- Lines injected by JS typing animation -->
                 </div>
             </div>
         </div>
@@ -92,30 +116,87 @@
     <!-- ═══════════════ FEATURES ═══════════════ -->
     <section class="features" id="features">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
+                <span class="section-label">Features</span>
                 <h2>Built for Power Users</h2>
                 <p class="section-sub">Everything you need to manage your Android server, right from your pocket terminal.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-panel">
-                    <div class="feature-icon">📊</div>
+                <div class="feature-panel reveal reveal-delay-1">
+                    <div class="feature-icon icon-mint">&#x1F4CA;</div>
                     <h3>Hardware Dashboard</h3>
-                    <p>Real-time monitoring of battery health, CPU usage, and thermal states using Termux API.</p>
+                    <p>Real-time monitoring of battery health, CPU usage, and thermal states using Termux API. Auto-refreshes every 5 seconds.</p>
+                    <span class="feature-tag">F1</span>
                 </div>
-                <div class="feature-panel">
-                    <div class="feature-icon">⚙️</div>
+                <div class="feature-panel reveal reveal-delay-2">
+                    <div class="feature-icon icon-blue">&#x2699;&#xFE0F;</div>
                     <h3>Daemon Manager</h3>
-                    <p>Control background processes and wake-locks to prevent Android from killing your services.</p>
+                    <p>Control SSH, HTTP file servers, and wake-locks with one toggle. Prevent Android from killing your background services.</p>
+                    <span class="feature-tag">F2</span>
                 </div>
-                <div class="feature-panel">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Network Controls</h3>
-                    <p>Toggle SSH, HTTP file servers, and view detailed network stats with zero configuration.</p>
-                </div>
-                <div class="feature-panel">
-                    <div class="feature-icon">📡</div>
+                <div class="feature-panel reveal reveal-delay-3">
+                    <div class="feature-icon icon-indigo">&#x1F4E1;</div>
                     <h3>IoT Bridge</h3>
-                    <p>Receive sensor data via HTTP webhooks and persist them to a local SQLite database.</p>
+                    <p>Receive sensor data from ESP32, Arduino, or any HTTP device via webhooks. Persist events to SQLite. View in real-time.</p>
+                    <span class="feature-tag">F3</span>
+                </div>
+                <div class="feature-panel reveal reveal-delay-4">
+                    <div class="feature-icon icon-amber">&#x1F5A7;</div>
+                    <h3>Zero Dependencies</h3>
+                    <p>Single statically-linked Go binary. No Python, no Node, no runtime. wget, chmod, run. Pure Go with no CGO required.</p>
+                    <span class="feature-tag">Cross-platform</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ HOW IT WORKS ═══════════════ -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Get Started</span>
+                <h2>Up and Running in 30 Seconds</h2>
+                <p class="section-sub">No configuration files, no setup wizards, no dependencies to install.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step reveal reveal-delay-1">
+                    <div class="step-number sn-1">1</div>
+                    <h3>Download</h3>
+                    <p>Grab the latest binary from GitHub Releases. One file, one command.</p>
+                </div>
+                <div class="step reveal reveal-delay-2">
+                    <div class="step-number sn-2">2</div>
+                    <h3>Make Executable</h3>
+                    <p>Run chmod +x and you're done. No install scripts, no package managers.</p>
+                </div>
+                <div class="step reveal reveal-delay-3">
+                    <div class="step-number sn-3">3</div>
+                    <h3>Run</h3>
+                    <p>Launch the TUI dashboard. Your headless Android is now under control.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ STATS ═══════════════ -->
+    <section class="stats" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-value" data-count="1">0</div>
+                    <div class="stat-label">Single Binary</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-1">
+                    <div class="stat-value" data-count="0">0</div>
+                    <div class="stat-label">Dependencies</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-2">
+                    <div class="stat-value" data-count="4">0</div>
+                    <div class="stat-label">TUI Screens</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-3">
+                    <div class="stat-value" data-count="8080">0</div>
+                    <div class="stat-label">IoT Webhook Port</div>
                 </div>
             </div>
         </div>
@@ -124,34 +205,66 @@
     <!-- ═══════════════ INSTALLATION ═══════════════ -->
     <section class="install" id="install">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
+                <span class="section-label">Installation</span>
                 <h2>Quick Installation</h2>
-                <p class="section-sub">Get TermNode up and running on your device in seconds.</p>
+                <p class="section-sub">Choose your preferred method to get started.</p>
             </div>
+
+            <div class="install-tabs reveal">
+                <button class="install-tab active" data-tab="binary">Binary</button>
+                <button class="install-tab" data-tab="source">From Source</button>
+                <button class="install-tab" data-tab="go">Go Install</button>
+            </div>
+
             <div class="code-container">
-                <div class="code-block">
-                    <button class="code-copy">Copy</button>
-                    <code>wget https://github.com/Mr-Dark-debug/termnode/releases/latest/download/termnode
-chmod +x termnode
-./termnode</code>
+                <div class="install-panel active" id="panel-binary">
+                    <div class="code-block">
+                        <button class="code-copy">Copy</button>
+                        <code><span class="comment"># Download the latest release</span>
+<span class="cmd">wget</span> <span class="url">https://github.com/Mr-Dark-debug/termnode/releases/latest/download/termnode</span>
+<span class="cmd">chmod</span> <span class="flag">+x</span> termnode
+<span class="cmd">./termnode</span></code>
+                    </div>
+                    <p class="install-note">Works on any aarch64 Android device with Termux.</p>
                 </div>
-                <p style="text-align:center; color:var(--text-dim); font-size:0.9rem;">Or using Go:</p>
-                <div class="code-block" style="margin-top:16px;">
-                    <button class="code-copy">Copy</button>
-                    <code>go install github.com/Mr-Dark-debug/termnode@latest</code>
+
+                <div class="install-panel" id="panel-source">
+                    <div class="code-block">
+                        <button class="code-copy">Copy</button>
+                        <code><span class="comment"># Build from source</span>
+<span class="cmd">git clone</span> <span class="url">https://github.com/Mr-Dark-debug/termnode.git</span>
+<span class="cmd">cd</span> termnode
+<span class="cmd">go build</span> <span class="flag">-o termnode</span> .
+<span class="cmd">./termnode</span></code>
+                    </div>
+                    <p class="install-note">Requires Go 1.22+ and Termux with termux-api package.</p>
+                </div>
+
+                <div class="install-panel" id="panel-go">
+                    <div class="code-block">
+                        <button class="code-copy">Copy</button>
+                        <code><span class="cmd">go install</span> <span class="url">github.com/Mr-Dark-debug/termnode@latest</span></code>
+                    </div>
+                    <p class="install-note">Installs to $GOPATH/bin. Make sure it's in your $PATH.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══════════════ COMMUNITY & STATS ═══════════════ -->
-    <section class="community">
+    <!-- ═══════════════ COMMUNITY ═══════════════ -->
+    <section class="community" id="community">
         <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Community</span>
+                <h2>Open Source, Community Driven</h2>
+                <p class="section-sub">TermNode is MIT licensed and built in the open. Contributions welcome.</p>
+            </div>
             <div class="community-grid">
-                <div class="community-card">
-                    <h3>Community Driven</h3>
-                    <p>TermNode is open source. Join our growing list of contributors and help build the future of mobile server management.</p>
-                    <div class="contributor-list">
+                <div class="community-card reveal">
+                    <h3>Contributors</h3>
+                    <p>Meet the people building TermNode. Every contribution matters, from code to documentation.</p>
+                    <div class="contributor-list" id="contributorList">
                         <div class="contributor-slot"></div>
                         <div class="contributor-slot"></div>
                         <div class="contributor-slot"></div>
@@ -159,37 +272,89 @@ chmod +x termnode
                         <div class="contributor-slot"></div>
                     </div>
                 </div>
-                <div class="community-card">
+                <div class="community-card reveal">
                     <h3>Repository Growth</h3>
                     <p>Tracking stars and engagement on GitHub.</p>
                     <div class="stats-chart">
-                        <svg viewBox="0 0 400 200" width="100%" height="100%">
-                            <path class="chart-line" d="M0,180 Q50,160 100,170 T200,100 T300,80 T400,20" />
+                        <svg viewBox="0 0 400 160" width="100%" height="100%">
+                            <defs>
+                                <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="var(--teal)" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="var(--teal)" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+                            <path class="chart-area" d="M0,140 Q50,130 100,120 T200,80 T300,50 T400,20 L400,160 L0,160 Z" />
+                            <path class="chart-line" d="M0,140 Q50,130 100,120 T200,80 T300,50 T400,20" />
                             <circle cx="400" cy="20" r="4" fill="var(--teal)" />
+                            <circle cx="400" cy="20" r="8" fill="var(--teal)" opacity="0.2">
+                                <animate attributeName="r" values="8;14;8" dur="2s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="0.2;0;0.2" dur="2s" repeatCount="indefinite"/>
+                            </circle>
                         </svg>
                     </div>
-                    <div style="display:flex; justify-content:space-between; margin-top:12px; font-family:var(--font-mono); font-size:0.8rem; color:var(--text-dim);">
-                        <span>Jan</span>
-                        <span>Feb</span>
-                        <span>Mar (Current)</span>
-                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ CTA ═══════════════ -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="reveal">Ready to Take Control?</h2>
+            <p class="reveal">Turn your old Android into a powerful headless server. One download, zero configuration.</p>
+            <div class="reveal" style="position:relative;">
+                <a href="https://github.com/Mr-Dark-debug/termnode" class="btn btn-primary btn-lg">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    Get Started on GitHub
+                </a>
             </div>
         </div>
     </section>
 
     <!-- ═══════════════ FOOTER ═══════════════ -->
     <footer class="footer">
-        <div class="container footer-inner">
-            <div class="nav-logo">
-                Term<span class="logo-accent">Node</span>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <span>&gt;_</span> Term<span class="logo-accent">Node</span>
+                    </div>
+                    <p>A unified TUI dashboard for headless Android management. Built with Go and Bubble Tea.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#install">Installation</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                        <li><a href="https://github.com/Mr-Dark-debug/termnode/releases">Releases</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="docs.html">Documentation</a></li>
+                        <li><a href="https://github.com/Mr-Dark-debug/termnode/wiki">Wiki</a></li>
+                        <li><a href="https://github.com/Mr-Dark-debug/termnode/issues">Issues</a></li>
+                        <li><a href="#community">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Project</h4>
+                    <ul>
+                        <li><a href="https://github.com/Mr-Dark-debug/termnode">GitHub</a></li>
+                        <li><a href="https://github.com/Mr-Dark-debug/termnode/blob/main/LICENSE">MIT License</a></li>
+                        <li><a href="https://github.com/Mr-Dark-debug/termnode/graphs/contributors">Contributors</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-copy">
-                &copy; 2026 TermNode Project. MIT Licensed.
-            </div>
-            <div class="nav-cta">
-                <a href="https://github.com/Mr-Dark-debug/termnode" class="nav-link">GitHub</a>
-                <a href="#" class="nav-link">Documentation</a>
+            <div class="footer-bottom">
+                <div class="footer-copy">&copy; 2026 TermNode Project. MIT Licensed.</div>
+                <div class="footer-social">
+                    <a href="https://github.com/Mr-Dark-debug/termnode" aria-label="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
